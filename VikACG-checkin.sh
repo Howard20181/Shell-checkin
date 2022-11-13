@@ -103,12 +103,13 @@ function checkin() {
             if [ "$checkin_info" != "414" ]; then
                 HTTP_STATUS=$(echo "$HTTP_RESPONSE" | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
                 if [ "$HTTP_STATUS" != 200 ]; then
-                    xlogger "$TAG" E "ID $current_user 签到失败：请求失败"
+                    xlogger "$TAG" E "ID $current_user 签到失败：请求失败，请检查网络连接"
+                else
+                    date=$(echo "$checkin_info" | jq -j '.date')
+                    credit=$(echo "$checkin_info" | jq -j '.credit')
+                    my_credit=$(echo "$checkin_info" | jq -j '.mission.my_credit')
+                    xlogger "$TAG" I "ID $current_user 在 $date 签到成功，获得积分：$credit 目前积分：$my_credit 请查看积分是否有变动"
                 fi
-                date=$(echo "$checkin_info" | jq -j '.date')
-                credit=$(echo "$checkin_info" | jq -j '.credit')
-                my_credit=$(echo "$checkin_info" | jq -j '.mission.my_credit')
-                xlogger "$TAG" I "ID $current_user 在 $date 签到成功，获得积分：$credit 目前积分：$my_credit 请查看积分是否有变动"
             else
                 xlogger "$TAG" E "ID $current_user 签到失败：是否重复签到？"
             fi
