@@ -103,7 +103,7 @@ function checkin() {
             if [ "$checkin_info" != "414" ]; then
                 HTTP_STATUS=$(echo "$HTTP_RESPONSE" | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
                 if [ "$HTTP_STATUS" != 200 ]; then
-                    xlogger "$TAG" E "ID $current_user 签到失败：请求失败，请检查网络连接"
+                    xlogger "$TAG" E "ID $current_user 签到失败：请求失败。可能的原因有：1、网络连接失败；2、cookie过期"
                 else
                     date=$(echo "$checkin_info" | jq -j '.date')
                     credit=$(echo "$checkin_info" | jq -j '.credit')
