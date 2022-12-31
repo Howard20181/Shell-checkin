@@ -42,6 +42,10 @@ xlogger() {
     fi
 }
 TAG=$(basename "$0")
+command -v jq >/dev/null 2>&1 || {
+    xlogger "$TAG" E "jq 未安装! 退出!"
+    exit 1
+}
 CONF="$BasePath"/$TAG.conf
 if [ -f "$CONF" ]; then
     # shellcheck source=./$TAG.conf
