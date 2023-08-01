@@ -72,7 +72,7 @@ function checkin() {
         -H 'dnt: 1' \
         -H 'origin: https://glados.rocks' \
         -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0' \
-        --data-raw '{"token":"glados.network"}' \
+        --data-raw '{"token":"glados.one"}' \
         --compressed)
     checkin_info=$(echo "$HTTP_RESPONSE" | sed -e 's/HTTPSTATUS\:.*//g' | jq -j .)
     HTTP_STATUS=$(echo "$HTTP_RESPONSE" | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
