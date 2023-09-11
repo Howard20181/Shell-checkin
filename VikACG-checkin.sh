@@ -1,5 +1,7 @@
 #!/bin/bash
 # echo_off=1
+# export ALL_PROXY="socks5h://host:port"
+# export ALL_PROXY="socks5h://User:Password@host:port"
 BasePath=$(
     cd "$(dirname "$0")" || exit 1
     pwd
@@ -79,7 +81,7 @@ function checkin() {
     JSON=$(echo "$HTTP_RESPONSE" | sed -e 's/HTTPSTATUS\:.*//g')
     HTTP_STATUS=$(echo "$HTTP_RESPONSE" | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
     if [ "$HTTP_STATUS" != 200 ]; then
-        xlogger "$TAG" E "请求失败，是否未登录？"
+        xlogger "$TAG" E "请求失败: $HTTP_STATUS，是否未登录?"
     else
         credit_info=$(echo "$JSON" | jq -j .)
 
@@ -88,7 +90,7 @@ function checkin() {
         checkGetMission=$(echo "$credit_info" | jq -j '.mission.credit')
         current_user=$(echo "$credit_info" | jq -j '.mission.current_user')
         if [ "$checkGetMission" = "0" ]; then
-            xlogger "$TAG" I "ID $current_user 目前积分：$my_credit"
+            xlogger "$TAG" I "ID $current_user 目前积分: $my_credit"
             HTTP_RESPONSE=$(curl -s -w "HTTPSTATUS:%{http_code}" 'https://www.vikacg.com/wp-json/b2/v1/userMission' \
                 -X 'POST' \
                 -H 'authority: www.vikacg.com' \
