@@ -1,4 +1,4 @@
-# GLaDOS 签到脚本 - PowerShell 版本
+# GLaDOS 签到脚本 - PowerShell 版本, 仅支持 Powershell 7
 
 # 获取脚本基础路径
 $BasePath = Split-Path -Parent $MyInvocation.MyCommand.Path
