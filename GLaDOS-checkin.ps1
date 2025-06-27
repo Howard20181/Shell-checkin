@@ -69,7 +69,7 @@ function Invoke-Checkin {
         $headers = @{
             'authority'       = 'glados.rocks'
             'accept'          = 'application/json, text/plain, */*'
-            'accept-encoding' = 'gzip, deflate, br, zstd'
+            'accept-encoding' = 'identity'
             'accept-language' = 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7'
             'content-type'    = 'application/json;charset=UTF-8'
             'cookie'          = $Cookie

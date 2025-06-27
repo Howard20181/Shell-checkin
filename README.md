@@ -1,5 +1,7 @@
 # Shell-checkin
 
+Deprecated: Check [PowerShell Version](README-PowerShell.md)
+
 ## Dependences
 
     bash curl jq

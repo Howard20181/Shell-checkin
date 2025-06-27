@@ -14,7 +14,7 @@
 ### VikACG 签到脚本
 
 - `VikACG-checkin.ps1` - VikACG 网站签到的 PowerShell 脚本
-- `VikACG-checkin.ps1.conf` - VikACG 签到脚本的配置文件（存放 b2_tokens）
+- `VikACG-checkin.conf` - VikACG 签到脚本的配置文件（存放 b2_tokens）
 
 ## 使用方法
 
@@ -25,12 +25,12 @@
 编辑 `GLaDOS-checkin.conf` 文件，每行添加一个完整的 cookie 字符串：
 
 ```text
-_ga=GA1.2.123456789.1234567890; _gid=GA1.2.987654321.0987654321; koa:sess=eyJ1c2VySWQiOjEyMzQ1...
+koa:sess=eyJ1c2VySWQiOjEyMzQ1...; koa:sess.sig=....
 ```
 
 #### VikACG 配置
 
-编辑 `VikACG-checkin.ps1.conf` 文件，每行添加一个 b2_token：
+编辑 `VikACG-checkin.conf` 文件，每行添加一个 b2_token：
 
 ```text
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3LnZpa2FjZy5jb20i...
@@ -56,11 +56,6 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3LnZpa2FjZy5jb20
 ```
 
 ### 3. 参数说明
-
-#### 通用参数
-
-- `-Debug` - 启用调试模式，显示详细的调试信息
-- `-EchoOff` - 关闭控制台输出，只记录到日志
 
 #### VikACG 特有参数
 
@@ -94,21 +89,16 @@ function Start-DailyCheckin {
 ### 相比原始 Bash 脚本的改进
 
 1. **更好的错误处理** - 使用 PowerShell 的异常处理机制
-2. **彩色输出** - 不同级别的日志使用不同颜色显示
-3. **参数支持** - 支持命令行参数控制脚本行为
-4. **Windows 集成** - 更好地与 Windows 系统集成
-5. **代理支持** - VikACG 脚本支持代理设置
-6. **延迟控制** - 添加请求间隔避免触发反爬虫机制
+2. **参数支持** - 支持命令行参数控制脚本行为
+3. **Windows 集成** - 更好地与 Windows 系统集成
+4. **代理支持** - VikACG 脚本支持代理设置
+5. **延迟控制** - 添加请求间隔避免触发反爬虫机制
 
 ### 日志级别
 
 - `I` (Info) - 信息，绿色显示
-- `N` (Notice) - 通知，白色显示
 - `W` (Warning) - 警告，黄色显示
 - `E` (Error) - 错误，红色显示
-- `C` (Critical) - 严重错误，深红色显示
-- `A` (Alert) - 警报，洋红色显示
-- `D` (Debug) - 调试信息，青色显示（仅在 Debug 模式下显示）
 
 ## 注意事项
 
@@ -134,10 +124,9 @@ function Start-DailyCheckin {
 
 ### 调试方法
 
-1. 使用 `-Debug` 参数查看详细信息
-2. 检查配置文件格式和内容
-3. 验证网络连接和代理设置
-4. 更新 cookie 或 token
+1. 检查配置文件格式和内容
+2. 验证网络连接和代理设置
+3. 更新 cookie 或 token
 
 ## 更新日志
 
