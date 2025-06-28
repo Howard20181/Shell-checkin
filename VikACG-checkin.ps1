@@ -21,7 +21,7 @@ function Write-XLogger {
     
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $logMessage = "[$timestamp] [$Tag] [$Level] $Message"
-    Add-Content -Path "${Tag}.log" -Value $logMessage
+    Add-Content -Path "checkin.log" -Value $logMessage
     switch ($Level.ToUpper()) {
         "I" { 
             Write-Information $logMessage -InformationAction Continue
