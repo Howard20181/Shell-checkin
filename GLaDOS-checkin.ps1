@@ -92,19 +92,21 @@ function Invoke-Checkin {
         
         $checkin_code = $response.code
         $message = $response.message
+        $points = $response.points
         $user_id = $null
         if ($response.list -and $response.list.Count -gt 0) {
             $user_id = $response.list[0].user_id
             $asset = $response.list[0].asset
             [int]$change = $response.list[0].change
+            [int]$balance = $response.list[0].balance
             $latest_success = $response.list[0].detail
             $latest_success_time = (Get-Date -UnixTimeSeconds ($response.list[0].time / 1000))
-            Write-XLogger -Tag $TAG -Level "I" -Message "ID $user_id 最近一次签到成功: $latest_success $change $asset, 时间: $latest_success_time"
+            Write-XLogger -Tag $TAG -Level "I" -Message "ID $user_id 最后一次签到: $latest_success $change $asset, 时间: $latest_success_time, 目前积分: $balance"
         }
         else {
         }
         if ($checkin_code -eq 0) {
-            Write-XLogger -Tag $TAG -Level "I" -Message "ID $user_id 签到成功: $message"
+            Write-XLogger -Tag $TAG -Level "I" -Message "ID $user_id 签到成功: $message, 获得积分: $points"
         }
         elseif ($checkin_code -eq 1) {
             Write-XLogger -Tag $TAG -Level "E" -Message "ID $user_id 签到失败: $message"
