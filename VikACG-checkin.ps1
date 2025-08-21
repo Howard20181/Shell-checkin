@@ -132,7 +132,12 @@ function Invoke-Checkin {
         $statusCode = $_.Exception.Response.StatusCode.value__
         if ($statusCode) {
             if ($statusCode -ne 200) {
-                Write-XLogger -Tag $TAG -Level "E" -Message "请求失败: ${statusCode}: $($_.Exception.Response.Content.ReadAsStringAsync().Result), 是否未登录?"
+                $result = $_.Exception.Response.GetResponseStream()
+                $reader = New-Object System.IO.StreamReader($result)
+                $reader.BaseStream.Position = 0
+                $reader.DiscardBufferedData()
+                $responseBody = $reader.ReadToEnd();
+                Write-XLogger -Tag $TAG -Level "E" -Message "请求失败: ${statusCode}: $responseBody, 是否未登录?"
             }
         }
         else {
