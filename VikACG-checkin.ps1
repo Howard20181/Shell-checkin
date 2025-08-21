@@ -84,7 +84,7 @@ function Invoke-Checkin {
             'origin'          = 'https://www.vikacg.com'
             'priority'        = 'u=1, i'
             'referer'         = 'https://www.vikacg.com/wallet/mission'
-            'user-agent'      = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'
+            'user-agent'      = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'
         }
         
         $body = @{
@@ -132,7 +132,7 @@ function Invoke-Checkin {
         $statusCode = $_.Exception.Response.StatusCode.value__
         if ($statusCode) {
             if ($statusCode -ne 200) {
-                Write-XLogger -Tag $TAG -Level "E" -Message "请求失败: $statusCode, 是否未登录?"
+                Write-XLogger -Tag $TAG -Level "E" -Message "请求失败: ${statusCode}: $($_.Exception.Response.Content.ReadAsStringAsync().Result), 是否未登录?"
             }
         }
         else {
